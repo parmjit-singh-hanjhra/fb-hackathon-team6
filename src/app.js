@@ -228,7 +228,9 @@ function receivedMessage(event) {
       case 'help':
         sendHelpOptionsAsButtonTemplates(senderID);
         break;
-      
+      case 'recommend':
+        sendHelpOptionsAsButtonTemplates(senderID);
+        break;
       default:
         // otherwise, just echo it back to the sender
         sendTextMessage(senderID, messageText);
