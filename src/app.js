@@ -433,6 +433,7 @@ function respondToHelpRequestWithTemplates(recipientId, requestForHelpOnFeature)
                           {
                               "type":"web_url",
                               "url": url,
+                              "sort_order": "best-selling",
                               "title":"Read description",
                               "webview_height_ratio": "compact",
                               "messenger_extensions": "true"
