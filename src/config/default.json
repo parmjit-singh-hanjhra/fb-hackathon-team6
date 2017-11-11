@@ -5,9 +5,9 @@
     //FACEBOOK CREDENTIALS
     "fb_appSecret": "bab3f6037892d64bf2cd29c7527a489b",
     "fb_pageAccessToken": "EAABycJ3s1ogBAKedjGSSBfhY7x0XzBsvLVZCOStdR6fBQREHcQ9nWwOnNiKrhCZBvWkSCBKPJQjG8CjiaiIaiD81HwAxzhviPYZBtEHeyfdyUe64RL4HgUdRB0LyfACqZASZCA5fxB8yWeRplTwL5SwMHmdieGtUKyBMrZA30iwpZA1e48hMKF8",
-    "fb_validationToken": "",
+    "fb_validationToken": "team6",
 
     //SHOPIFY CREDENTIALS
-    "sh_apiKey": "",
-    "sh_apiPassword": "",
+    "sh_apiKey": "d30ac1dba7a4f1cf5b494f21d11667c0",
+    "sh_apiPassword": "a9862d7cfd3190ee9432d6d80e576ca0",
 }
