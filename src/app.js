@@ -228,14 +228,42 @@ function receivedMessage(event) {
       case 'help':
         sendHelpOptionsAsButtonTemplates(senderID);
         break;
-      case 'recommend':
-        sendHelpOptionsAsButtonTemplates(senderID);
+      case 'best sellers':
+        sendBestSellersAsButtonTemplates(senderID);
         break;
       default:
         // otherwise, just echo it back to the sender
         sendTextMessage(senderID, messageText);
     }
   }
+}
+
+function sendBestSellersAsButtonTemplates(recipientId) {
+    console.log("[sendBestSellersAsButtonTemplates] Sending the Best sellers menu");
+    var messageData = {
+        recipient: {
+            id: recipientId
+        },
+        message:{
+            attachment:{
+                type:"template",
+                payload:{
+                    template_type:"button",
+                    text:"Click the button before to get a list of 3 of our best selling products.",
+                    buttons:[
+                        {
+                            "type":"postback",
+                            "title":"Get 3 products",
+                            "payload":JSON.stringify({action: 'QR_GET_BEST_SELLERS', limit: 3})
+                        }
+                        // limit of three buttons
+                    ]
+                }
+            }
+        }
+    };
+
+    callSendAPI(messageData);
 }
 
 /*
@@ -391,6 +419,50 @@ function respondToHelpRequestWithTemplates(recipientId, requestForHelpOnFeature)
 
 
       break;
+
+      case 'QR_GET_BEST_SELLERS':
+          var products = shopify.product.list({ limit: requestPayload.limit});
+          products.then(function(listOfProducs) {
+              listOfProducs.forEach(function(product) {
+                  var url = HOST_URL + "/product.html?id="+product.id;
+                  templateElements.push({
+                      title: product.title,
+                      subtitle: product.tags,
+                      image_url: product.image.src,
+                      buttons:[
+                          {
+                              "type":"web_url",
+                              "url": url,
+                              "title":"Read description",
+                              "webview_height_ratio": "compact",
+                              "messenger_extensions": "true"
+                          },
+                          sectionButton('Get options', 'QR_GET_PRODUCT_OPTIONS', {id: product.id})
+                      ]
+                  });
+              });
+
+
+              var messageData = {
+                  recipient: {
+                      id: recipientId
+                  },
+                  message: {
+                      attachment: {
+                          type: "template",
+                          payload: {
+                              template_type: "generic",
+                              elements: templateElements
+                          }
+                      }
+                  }
+              };
+
+              callSendAPI(messageData);
+
+          });
+
+          break;
   }
 
 }
